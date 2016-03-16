@@ -1,0 +1,14 @@
+<h1>All Posts</h1>
+
+<%= form_tag(post_search_path, method: "get") do %>
+  <%= label_tag(:p, "Search for:") %>
+  <%= text_field_tag :p, params[:p] %>
+  <%= submit_tag("Search") %>
+<% end %>
+
+<% @posts.each do |post| %>
+  <ul>
+    <li><%=link_to post.title, post_path(post) %></li>
+    <!-- <li><%= post.body %></li> -->
+  </ul>
+<% end %>

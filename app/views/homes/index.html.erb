@@ -1,0 +1,13 @@
+<% if flash[:notice] %>
+    <h1><div class="notice"><%= flash[:notice] %></div></h1>
+<% end %>
+
+<div class="jumbotron">
+  <div class="container">
+    <% if user_signed_in? %>
+      <h1><%= "Hello " + @user.first_name %></h1>
+    <% else %>
+      <h1><%= "Hello Welcome" %></h1>
+    <% end %>
+  </div>
+</div>

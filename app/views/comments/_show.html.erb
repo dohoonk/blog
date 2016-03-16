@@ -1,0 +1,11 @@
+<div id="<%= dom_id(f) %>">
+  <li class="list-group-item">
+    <%= f.body %>
+    <br>
+    <%= "Commented By: " + f.user.first_name %>
+    <% if user_signed_in? && f.user_id? && current_user.id == f.user_id%>
+      <br>
+      <%= link_to "Delete", post_comment_path(@post.id, f.id), method: :delete ,remote: true  %>
+    <% end %>
+  </li>
+</div>

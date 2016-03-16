@@ -1,0 +1,8 @@
+<% @favourite = @post.favourites.find_by_user_id current_user %>
+<% if current_user != @post.user_id %>
+  <% if @favourite %>
+    <%= link_to icon('heart', font: { size: '2em' }), post_favourite_path(@post,@favourite), method: :delete, remote: true %>
+  <% else %>
+    <%= link_to icon('heart-o'), post_favourites_path(@post), method: :POST, remote: true %>
+  <% end %>
+<% end %>

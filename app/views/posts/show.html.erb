@@ -1,0 +1,48 @@
+<h1>Post</h1>
+
+<%= @post.title %>
+<hr>
+<%= @post.body %>
+<hr>
+<%= "Category: " + @post.category %>
+<!-- Display the user  -->
+<% if @post.user != nil %>
+  <hr>
+  <%= "Created By: " + @post.user.first_name %>
+  <hr>
+<% end %>
+
+<!-- Favourting if the user is not the owner of the post -->
+<!-- <% if current_user != @post.user_id %>
+  <%= link_to icon('thumbs-o-up'), post_favourites_path(@post), method: :POST, remote: true %>
+  <% if @favourite %>
+    <%= link_to icon('thumbs-o-down'), post_favourite_path(@post,@favourite), method: :delete, data: {confirm: "Are you sure?"}, remote: true %>
+  <% end %>
+<% end %> -->
+<div class="favourite">
+  <%= render "/favourites/form" %>
+</div>
+
+<!-- Checking to see if User is authorized to edit or delete -->
+<div>
+  <% if user_signed_in? && current_user.id == @post.user_id %>
+    <%= link_to "Edit", edit_post_path(params[:id]) %>
+    <%= link_to "Delete", post_path, method: :delete, data: {confirm: "Are you sure?"} %>
+  <% end %>
+</div>
+
+<!-- Form for comments -->
+<div>
+  <%= form_for [@post, @comments], remote: true do |f| %>
+    <%= f.text_area :body %>
+    <%= f.submit %>
+  <% end %>
+</div>
+  <!-- Display Comments -->
+  <div class="comments">
+  <ul class="list-group">
+  <% @post.comments.each do |f| %>
+    <%= render "/comments/show", f: f  %>
+  <% end %>
+  </ul>
+</div>
