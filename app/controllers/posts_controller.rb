@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, only: [:new,:create,:edit]
+  before_action :find_post, only: [:show,:edit,:update,:destroy]
 
   def index
     @posts = Post.all
@@ -21,17 +22,15 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
     @comments = Comment.new
     @favourite = @post.favourite_for(current_user)
   end
 
   def edit
-    @post = Post.find(params[:id])
   end
 
   def update
-    @post = Post.find(params[:id])
+    @post.slug = nil
     if current_user == @post.user
       post_params = params.require(:post).permit(:title,:body)
       if @post.update post_params
@@ -45,7 +44,6 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[:id])
     @post.destroy
     redirect_to posts_path
   end
@@ -53,6 +51,12 @@ class PostsController < ApplicationController
   def search
     @posts = Post.search(params[:p])
     render :index
+  end
+
+  private
+
+  def find_post
+    @post = Post.friendly.find(params[:id])
   end
 
 end
