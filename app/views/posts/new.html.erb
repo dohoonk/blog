@@ -5,7 +5,16 @@
   <% end %>
 
 
-<%= form_for @post do |f| %>
+<%= simple_form_for @post do |f| %>
+  <%= f.input :title, placeholder: "Let's talk buddy..."%>
+  <%= f.input :body, hint: "Whatever you want write it here.." %>
+  <%= f.input :category, priority: ["Coding"], collection: ["Science","Food","Sports","Books","Coding"] %>
+  <%= f.button :submit, class: "btn btn-primary" %>
+<% end %>
+
+
+<!-- Regular form_for -->
+<!-- <%= form_for @post do |f| %>
   <div>
     <%= f.label :title %>
     <%= f.text_field :title %>
@@ -22,4 +31,4 @@
   <div>
     <%= f.submit %>
   </div>
-<% end %>
+<% end %> -->

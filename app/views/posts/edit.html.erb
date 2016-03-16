@@ -4,7 +4,15 @@
   <li><%= message %></li>
   <% end %>
 
-<%= form_for @post do |f| %>
+<%= simple_form_for @post do |f| %>
+  <%= f.input :title %>
+  <%= f.input :body %>
+  <%= f.button :submit, class:"btn btn-primary" %>
+<% end %>
+
+
+
+<!-- <%= form_for @post do |f| %>
   <%= f.label :title %>
   <%= f.text_field :title %>
 
@@ -12,4 +20,4 @@
   <%= f.text_field :body %>
 
   <%= f.submit %>
-<% end %>
+<% end %> -->

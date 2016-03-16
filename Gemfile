@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+gem 'simple_form'
 gem 'friendly_id'
 gem "bootstrap-sass"
 gem 'font-awesome-sass'
